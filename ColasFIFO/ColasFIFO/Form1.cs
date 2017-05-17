@@ -19,8 +19,10 @@ namespace ColasFIFO
 
         private void btnSimulacion_Click(object sender, EventArgs e)
         {
-            Simulacion simulacion1 = new Simulacion(100);
+            //Simulacion simulacion1 = new Simulacion(100);
+            Simulacion simulacion1 = new Simulacion(200);
             txbResultados.Text = simulacion1.simular();
+            simulacion1.algo();
         }
 
         
