@@ -45,6 +45,9 @@ namespace ColasFIFO
             get { return _siguiente; }
         }
 
-        
+        public override string ToString()
+        {
+            return "Proceso "+_nProceso+ " Ciclos " + _ciclosP + Environment.NewLine;
+        }
     }
 }
