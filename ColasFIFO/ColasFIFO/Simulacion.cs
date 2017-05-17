@@ -9,13 +9,28 @@ namespace ColasFIFO
     class Simulacion
     {
 
-        private int _ciclo = 0, p;
+        private int _ciclo = 0, p, _prob = 0, _numMin = 0, _numMax = 0, _numMinCProceso = 0, _numMaxCProceso = 0;
         private static Random _ran = new Random();
         Proceso inicio, ultimo;
 
         public Simulacion(int ciclo)
         {
             _ciclo = ciclo;
+            _prob = 25;
+            _numMin = 0;
+            _numMax = 101;
+            _numMinCProceso = 4;
+            _numMaxCProceso = 14;
+        }
+
+        public Simulacion(int ciclo, int probabilidad, int numMin, int numMax, int numMinCP, int numMaxCP)
+        {
+            _ciclo = ciclo;
+            _prob = probabilidad;
+            _numMin = numMin;
+            _numMax = numMax;
+            _numMinCProceso = numMinCP;
+            _numMaxCProceso = numMaxCP;
         }
 
         public string simular()
@@ -23,8 +38,8 @@ namespace ColasFIFO
             int libre = 0;
             for (int i = 1; i <= _ciclo; i++)
             {
-                p = probabilidad(1, 101);
-                if (p <= 25)
+                p = probabilidad(_numMin, _numMax);
+                if (p <= _prob)
                 {
                     crearProceso();
                 }
@@ -37,7 +52,7 @@ namespace ColasFIFO
                 else
                     libre += 1;
             }
-            return reporte() + Environment.NewLine + "Sin procesar " + libre.ToString();
+            return reporte() + Environment.NewLine + "Sin procesar " + libre.ToString() + " ciclos";
         }
 
         private int probabilidad(int min, int max)
@@ -48,7 +63,7 @@ namespace ColasFIFO
         private void crearProceso()
         {
             Proceso nuevo = new Proceso();
-            p = probabilidad(4, 15);
+            p = probabilidad(_numMinCProceso, _numMaxCProceso);
             nuevo.ciclosP = p;
             agregarProceso(nuevo);
         }
@@ -87,5 +102,16 @@ namespace ColasFIFO
             return datos;
         }
 
+        public void algo()
+        {
+            Proceso temp = inicio;
+            string datos = "";
+            while (temp != null)
+            {
+                datos += temp;
+                temp = temp.siguiente;
+            }
+            datos += "1";
+        }
     }
 }
