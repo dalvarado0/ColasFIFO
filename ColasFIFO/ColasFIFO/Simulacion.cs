@@ -16,7 +16,7 @@ namespace ColasFIFO
         public Simulacion(int ciclo)
         {
             _ciclo = ciclo;
-            _prob = 25;
+            _prob = 18;
             _numMin = 0;
             _numMax = 101;
             _numMinCProceso = 4;
@@ -48,6 +48,8 @@ namespace ColasFIFO
                     inicio.ciclosP -= 1;
                     if (inicio.ciclosP == 0)
                         inicio = inicio.siguiente;
+                    //else //para el ejercicio siguiente lista circular.
+                    //temp = temp.siguiente;
                 }
                 else
                     libre += 1;
